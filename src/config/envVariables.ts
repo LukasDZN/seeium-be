@@ -33,13 +33,15 @@ const envVariablesSchema = z.object({
 
   MONGO_DB_URL: z.string().url(),
 
-  REDIS_URL: z.string(),
-
+  AIRTABLE_API_KEY: z.string(),
+  
   REVERSE_GEOCODING_API_URL: z.string().url(),
 
-  TYPESENSE_URL: z.string().optional(),
-  TYPESENSE_API_KEY: z.string().optional(),
-  TYPESENSE_SEARCH_ONLY_API_KEY: z.string().optional(),
+  // REDIS_URL: z.string(),
+
+  // TYPESENSE_URL: z.string().optional(),
+  // TYPESENSE_API_KEY: z.string().optional(),
+  // TYPESENSE_SEARCH_ONLY_API_KEY: z.string().optional(),
 })
 
 export const envVariables = envVariablesSchema.parse(process.env)

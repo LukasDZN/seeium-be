@@ -2,17 +2,12 @@ import chalk from 'chalk'
 import express, { Application, NextFunction, Request, Response } from 'express'
 import { StatusCodes } from 'http-status-codes'
 import morgan from 'morgan'
-// import { replaceTscAliasPaths } from 'tsc-alias'
 import { envVariables } from './config/envVariables.js'
 import { makeWinstonLogger } from './loggers/makeWinston.logger.js'
 import { logErrorsMiddleware } from './middleware/logErrors.middleware.js'
 import { logReqAndResMiddleware } from './middleware/logReqAndRes.middleware.js'
 import { router } from './modules/router.js'
 import { ErrorResponseDto } from './modules/shared/types/ErrorResponseDto.type.js'
-
-// replaceTscAliasPaths({
-//   debug: true, // Or run with --debug
-// })
 
 export const app: Application = express()
 
