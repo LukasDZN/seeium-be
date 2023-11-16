@@ -19,7 +19,6 @@
     "#config/*": "./src/config/*",
     "#infrastructure/*": "./src/infrastructure/*"
   },
-  
   "scripts": {
     "prepare": "husky install",
     "lint": "eslint --ext .ts .",
@@ -33,7 +32,7 @@
     "plop": "plop && yarn prettierWrite",
     "script:seedDevelopmentDatabase": "NODE_ENV=development APP_ENV=development ts-node ./src/scripts/seedDatabase.script.ts",
     "dev": "NODE_ENV=development APP_ENV=development nodemon --watch \"*.ts\" --exec \"node --loader ts-node/esm\" ./src/server.ts",
-    "build": "tsc && tsc-alias",
+    "build": "tsc",
     "start:production": "NODE_ENV=production APP_ENV=production node ./dist/server.js",
     "production:debug": "NODE_ENV=development APP_ENV=production nodemon --watch \"*.ts\" --exec \"node --loader ts-node/esm\" ./src/server.ts"
   },
@@ -53,7 +52,6 @@
     "prettier": "^3.1.0",
     "supertest": "^6.3.3",
     "ts-node": "^10.9.1",
-    "tsc-alias": "^1.8.8",
     "typescript": "^5.1.6",
     "vitest": "^0.34.3"
   },
