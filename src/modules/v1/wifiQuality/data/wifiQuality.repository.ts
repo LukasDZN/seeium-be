@@ -1,10 +1,8 @@
-import { winstonLogger } from '../../../../loggers/winstonLogger.js'
+import { logger } from '../../../../app.js'
 import { Coordinates } from '../../shared/types/Coordinates.type.js'
 import { WifiQualityWriteRecord } from '../features/createWifiQuality/createWifiQuality.record.type.js'
 import { WifiQualityReadRecord } from '../features/getWifiQuality/getWifiQuality.record.type.js'
 import { WifiQualityModel } from './wifiQuality.model.js'
-
-const logger = winstonLogger()
 
 const getWifiQualityReadRecordByCoordinates = async ({
   coordinates,

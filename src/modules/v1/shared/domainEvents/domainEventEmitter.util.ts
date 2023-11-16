@@ -1,7 +1,4 @@
 import EventEmitter from 'events'
-import { winstonLogger } from '../../../../loggers/winstonLogger.js'
-
-const logger = winstonLogger()
 
 type EventMap = {
   // [domainEventTypes.someDomainEvent]: SomeDomainEventHandlerInput
@@ -17,7 +14,7 @@ export const domainEventEmitter = () => {
     eventType: T
     payload: EventMap[T]
   }) => {
-    logger.debug(`Event emitted. eventType: '${eventType}'`)
+    // console.log(`Event emitted. eventType: '${eventType}'`)
 
     eventEmitterInstance.emit(eventType, payload)
   }

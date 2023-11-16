@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express'
-import { buildWinstonLogger } from '../loggers/buildWinston.logger.js'
+import { makeWinstonLogger } from '../loggers/makeWinston.logger.js'
 import { HttpRequest } from '../modules/v1/shared/types/HttpRequest.js'
 
 export const logErrorsMiddleware = (
@@ -9,7 +9,7 @@ export const logErrorsMiddleware = (
   next: NextFunction // eslint-disable-line @typescript-eslint/no-unused-vars
   // next param is required for Express to recognize this as an error handler
 ) => {
-  const winstonLogger = buildWinstonLogger()
+  const winstonLogger = makeWinstonLogger({})
 
   const requestLog = {
     // Note: or just ...request?

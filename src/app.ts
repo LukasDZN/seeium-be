@@ -3,12 +3,15 @@ import express, { Application, NextFunction, Request, Response } from 'express'
 import { StatusCodes } from 'http-status-codes'
 import morgan from 'morgan'
 import { envVariables } from './config/envVariables.js'
+import { makeWinstonLogger } from './loggers/makeWinston.logger.js'
 import { logErrorsMiddleware } from './middleware/logErrors.middleware.js'
 import { logReqAndResMiddleware } from './middleware/logReqAndRes.middleware.js'
 import { router } from './modules/v1/router.js'
 import { ErrorResponseDto } from './modules/v1/shared/types/ErrorResponseDto.type.js'
 
 export const app: Application = express()
+
+export const logger = makeWinstonLogger({})
 
 // Middleware for POST/PUT requests
 app.use(express.urlencoded({ limit: '1mb', extended: true }))
@@ -61,21 +64,13 @@ app.get('/api/healthCheck', (req, res) => {
 app.use(express.static('src/public'))
 
 // Send a 404 error if no route is matched
-app.use(
-  (
-    error: unknown,
-    req: Request,
-    res: Response,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    next: NextFunction
-  ) => {
-    const errorResponseDto: ErrorResponseDto = {
-      message: 'Route not found',
-    }
-
-    return res.status(StatusCodes.NOT_FOUND).send(errorResponseDto)
+app.use((req: Request, res: Response) => {
+  const errorResponseDto: ErrorResponseDto = {
+    message: 'Route not found',
   }
-)
+
+  return res.status(StatusCodes.NOT_FOUND).send(errorResponseDto)
+})
 
 // Log errors
 // Note 1: errorLogger must go after routes.

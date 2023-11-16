@@ -1,8 +1,8 @@
 import { StatusCodes } from 'http-status-codes'
 import { Controller } from '../../../shared/types/Controller.type.js'
+import { sharedUtils } from '../../../shared/utils/shared.utils.js'
 import { validateGetWifiQualityRequest } from './getWifiQuality.validator.js'
 import { getWifiQualityEntityByCoordinatesUseCase } from './getWifiQualityByCoordinates.useCase.js'
-import { sharedUtils } from '../../../shared/utils/shared.utils.js'
 
 export const getWifiQualityController: Controller = async ({ httpRequest }) => {
   const request = validateGetWifiQualityRequest({ httpRequest })

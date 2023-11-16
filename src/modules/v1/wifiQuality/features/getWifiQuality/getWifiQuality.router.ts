@@ -4,4 +4,4 @@ import { getWifiQualityController } from './getWifiQuality.controller.js'
 
 export const getPlaces: Router = express.Router()
 
-getPlaces.get('/wifiQuality', expressCallbackWrapper(getWifiQualityController))
+getPlaces.get('/wifi', expressCallbackWrapper(getWifiQualityController))

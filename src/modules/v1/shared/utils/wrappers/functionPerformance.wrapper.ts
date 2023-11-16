@@ -1,7 +1,4 @@
-import { winstonLogger } from '../../../../../loggers/winstonLogger.js'
 import { sharedUtils } from '../shared.utils.js'
-
-const logger = winstonLogger()
 
 /**
  * A wrapper function to measure the performance of a function.
@@ -33,7 +30,7 @@ export const functionPerformanceWrapper = <T extends Array<unknown>, U>(
       2
     )
 
-    logger.debug(
+    console.log(
       `Performance measurement: '${fn.name}' took ${roundedExecutionTimeInSeconds}s`
     )
 

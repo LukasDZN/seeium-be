@@ -91,10 +91,9 @@ export const logReqAndResMiddleware = () => {
     statusLevels: true,
     // Ignore these routes from req/res logging (but not error logging)
     ignoredRoutes: [
-      '/healthCheck',
+      '/api/healthCheck',
       '/docs/api.yaml',
       '/docs/renderedDocs.html',
-      '/docs/searchDb.html',
       '/images/favicon.ico',
       '/0a6ad30060afff00cb34.worker.js.map',
     ],

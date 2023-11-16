@@ -1,14 +1,11 @@
 import axios from 'axios'
 import { envVariables } from '../../../../config/envVariables.js'
-import { winstonLogger } from '../../../../loggers/winstonLogger.js'
 import { Coordinates } from '../../../../modules/v1/shared/types/Coordinates.type.js'
 import {
   LocationGeoDataRequestDto,
   LocationGeoDataSuccessResponseDto,
 } from './formattedGeoData.dtos.js'
 import { formattedGeoDataResponseDtoSchema } from './formattedGeoDataResponseDto.validator.js'
-
-const logger = winstonLogger()
 
 export type FetchCitySafetyByCoordinatesApiPortRequest = {
   coordinates: Coordinates
