@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express'
 import { makeWinstonLogger } from '../loggers/makeWinston.logger.js'
-import { HttpRequest } from '../modules/v1/shared/types/HttpRequest.js'
+import { HttpRequest } from '../modules/shared/types/HttpRequest.js'
 
 export const logErrorsMiddleware = (
   error: Error,

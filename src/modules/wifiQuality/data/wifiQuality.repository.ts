@@ -1,4 +1,4 @@
-import { logger } from '../../../../app.js'
+import { logger } from '../../../app.js'
 import { Coordinates } from '../../shared/types/Coordinates.type.js'
 import { WifiQualityWriteRecord } from '../features/createWifiQuality/createWifiQuality.record.type.js'
 import { WifiQualityReadRecord } from '../features/getWifiQuality/getWifiQuality.record.type.js'
