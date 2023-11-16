@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { sharedErrors } from '../errors/index.js'
+import { sharedErrors } from '../errors/shared.errors.js'
 
 export const handleAxiosError = (error: unknown, providerName: string) => {
   // Check if the error is an axios error
