@@ -1,0 +1,60 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Ratings API
+  description: API for retrieving ratings for a hotel
+servers:
+  - url: http://localhost:3000/api/v1
+paths:
+  /areaSafety:
+    get:
+      summary: Get hotel area safety information
+      description: Retrieve safety information about the area around the hotel.
+      operationId: getAreaSafety
+      parameters:
+        - in: query
+          name: id
+          schema:
+            type: string
+          description: The ID of the hotel. Mandatory only if the hotelPageUrl provider is Agoda.
+      responses:
+        '200':
+          description: Safety data
+          headers:
+            Cache-Control:
+              schema:
+                type: string
+                default: 'public, max-age=3600'
+              description: Cache control header with a maximum age of 1 hour (3600 seconds)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  areaSafetyScore:
+                    type: integer
+                    nullable: true
+                    description: Area safety score (ranging from 0 to 5). Returned as null if the hotel has no area safety score.
+                    example: 4.29
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string

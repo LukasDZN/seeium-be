@@ -1,0 +1,7 @@
+import mongoose from 'mongoose'
+import { {{pascalCase sliceName}}Schema } from './schemas/{{camelCase sliceName}}.schema.js'
+
+export const {{pascalCase sliceName}}Model = mongoose.model(
+  '{{snakeCase sliceName}}',
+  {{pascalCase sliceName}}Schema
+)

@@ -1,0 +1,27 @@
+import { Uid } from '../../../../shared/types/Uid.type.js'
+import { {{camelCase sliceName}}Mapper } from '../../../data/mapper/{{camelCase sliceName}}.mapper.js'
+import { {{camelCase sliceName}}Repository } from '../../../data/repository/{{camelCase sliceName}}.repository.js'
+import { {{pascalCase sliceName}}Entity } from '../../../entities/{{camelCase sliceName}}.entity.js'
+
+type {{camelCase featureName}}ByUidUseCase = ({
+  uid,
+}: {
+  uid: Uid
+}) => Promise<{{pascalCase sliceName}}Entity | null>
+
+export const {{camelCase featureName}}ByUidUseCase: {{camelCase featureName}}ByUidUseCase = async ({
+  uid,
+}) => {
+  const {{camelCase sliceName}}ReadRecord =
+    await {{camelCase sliceName}}Repository.{{camelCase featureName}}ReadRecordByUid({ uid })
+
+  if (!{{camelCase sliceName}}ReadRecord) {
+    return null
+  }
+
+  const {{camelCase sliceName}}Entity = {{camelCase sliceName}}Mapper.mapReadRecordTo{{pascalCase sliceName}}Entity({
+    {{camelCase sliceName}}ReadRecord,
+  })
+
+  return {{camelCase sliceName}}Entity
+}

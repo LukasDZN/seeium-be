@@ -1,0 +1,41 @@
+import { StatusCodes } from 'http-status-codes'
+import { sharedConstants } from '../../../shared/constants/shared.constants.js'
+import { Controller } from '../../../shared/types/Controller.type.js'
+import { {{camelCase sliceName}}Utils } from '../../utils/{{camelCase sliceName}}.utils.js'
+import { {{pascalCase featureName}}ResponseDto } from './{{camelCase featureName}}.dtos.js'
+import { {{camelCase featureName}}RequestValidator } from './{{camelCase featureName}}.request.validator.js'
+import { {{camelCase featureName}}UseCases } from './useCases/{{camelCase featureName}}.useCases.js'
+
+export const {{camelCase featureName}}Controller: Controller<{{pascalCase featureName}}ResponseDto> = async ({
+  httpRequest,
+}) => {
+  const request = {{camelCase featureName}}RequestValidator({ httpRequest })
+
+  const { uid } = request.params
+
+  const {{camelCase sliceName}}Entity = await {{camelCase featureName}}UseCases.{{camelCase featureName}}ByUidUseCase({
+    uid,
+  })
+
+  if (!{{camelCase sliceName}}Entity) {
+    const {{camelCase featureName}}NotFoundResponseDto: {{pascalCase featureName}}ResponseDto = {
+      headers: null,
+      statusCode: StatusCodes.NOT_FOUND,
+      body: null,
+    }
+
+    return {{camelCase featureName}}NotFoundResponseDto
+  }
+
+  const {{camelCase featureName}}ResponseDto: {{pascalCase featureName}}ResponseDto = {
+    headers: {
+      'cache-control': `public, max-age=${sharedConstants.time.ONE_HOUR_IN_SECONDS}`,
+    },
+    statusCode: StatusCodes.OK,
+    body: {
+      uid: {{camelCase sliceName}}Utils.{{camelCase sliceName}}Entity.getId({ {{camelCase sliceName}}Entity }),
+    },
+  }
+
+  return {{camelCase featureName}}ResponseDto
+}

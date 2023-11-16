@@ -1,0 +1,14 @@
+import mongoose from 'mongoose'
+
+export const {{pascalCase sliceName}}Schema = new mongoose.Schema({
+  thisIsAField: {
+    type: {
+      someField: {
+        type: String,
+        required: true,
+        unique: true,
+      },
+    },
+    required: true,
+  },
+})

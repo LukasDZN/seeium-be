@@ -1,0 +1,15 @@
+import { Id } from '../../shared/types/Id.type.js'
+
+export type {{pascalCase sliceName}}Entity = {
+    id: Id
+}
+
+export const make{{pascalCase sliceName}}Entity = ({ id }: {{pascalCase sliceName}}Entity): {{pascalCase sliceName}}Entity => {
+    // Validation if needed
+
+    const {{camelCase sliceName}}Entity: {{pascalCase sliceName}}Entity = {
+        id,
+    } as const
+
+    return {{camelCase sliceName}}Entity
+}

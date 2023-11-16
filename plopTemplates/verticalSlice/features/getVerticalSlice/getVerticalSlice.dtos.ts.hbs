@@ -1,0 +1,9 @@
+import { z } from 'zod'
+import { HttpResponse } from '../../../shared/types/HttpRequest.js'
+import { {{camelCase featureName}}RequestSchema } from './{{camelCase featureName}}.request.validator.js'
+
+export type {{pascalCase featureName}}RequestDto = z.infer<typeof {{camelCase featureName}}RequestSchema>
+
+export type {{pascalCase featureName}}ResponseDto = HttpResponse<{
+  uid: string
+} | null>

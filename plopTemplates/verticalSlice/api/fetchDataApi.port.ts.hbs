@@ -1,0 +1,8 @@
+import {
+  FetchDataApiPortRequestDto,
+  FetchDataApiPortResponseDto,
+} from './fetchDataApi.dtos.js'
+
+export type FetchDataApiPort = ({
+  currency,
+}: FetchDataApiPortRequestDto) => Promise<FetchDataApiPortResponseDto>

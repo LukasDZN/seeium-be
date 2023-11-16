@@ -1,0 +1,14 @@
+import { {{pascalCase sliceName}}Entity } from '../../entities/{{camelCase sliceName}}.entity.js'
+import { {{pascalCase sliceName}}ReadRecord } from '../records/{{camelCase sliceName}}ReadRecord.type.js'
+
+export const mapReadRecordTo{{pascalCase sliceName}}Entity = ({
+  {{camelCase sliceName}}ReadRecord,
+}: {
+  {{camelCase sliceName}}ReadRecord: {{pascalCase sliceName}}ReadRecord
+}): {{pascalCase sliceName}}Entity => {
+  const {{camelCase sliceName}}Entity: {{pascalCase sliceName}}Entity = {
+    id: {{camelCase sliceName}}ReadRecord._id.toString(),
+  }
+
+  return {{camelCase sliceName}}Entity
+}

@@ -1,0 +1,22 @@
+import { Uid } from '../../../shared/types/Uid.type.js'
+import { winstonLogger } from '../../../../../loggers/winston.logger.js'
+import { {{pascalCase sliceName}}Model } from '../{{camelCase sliceName}}.model.js'
+import { {{pascalCase sliceName}}ReadRecord } from '../records/{{camelCase sliceName}}ReadRecord.type.js'
+
+const logger = winstonLogger()
+
+export const get{{pascalCase sliceName}}ReadRecordByUid = async ({
+  uid,
+}: {
+  uid: Uid
+}): Promise<{{pascalCase sliceName}}ReadRecord | null> => {
+  const document = await {{pascalCase sliceName}}Model.findById(uid).lean().exec()
+
+  if (document) {
+    logger.debug(`✅ {{camelCase sliceName}} document by UID found`)
+  } else {
+    logger.debug(`❌ {{camelCase sliceName}} document by UID not found`)
+  }
+
+  return document
+}

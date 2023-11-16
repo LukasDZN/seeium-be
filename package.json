@@ -1,0 +1,67 @@
+{
+  "name": "seeium",
+  "version": "1.0.0",
+  "license": "UNLICENSED",
+  "private": true,
+  "description": "",
+  "main": "server.js",
+  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LukasDZN/seeium-be"
+  },
+  "engines": {
+    "node": "20.9.0"
+  },
+  "type": "module",
+  "scripts": {
+    "prepare": "husky install",
+    "lint": "eslint --ext .ts .",
+    "lintQuiet": "eslint --quiet --ext .ts .",
+    "lintFix": "eslint --fix --ext .ts .",
+    "prettierCheck": "prettier --check .",
+    "prettierWrite": "prettier --write **/*.{js,ts,mjs,cjs,json}",
+    "test": "NODE_ENV=production APP_ENV=test vitest run --no-threads",
+    "test:watch": "NODE_ENV=production APP_ENV=test vitest --no-threads",
+    "test:coverage": "NODE_ENV=production APP_ENV=test vitest run --coverage",
+    "plop": "plop && yarn prettierWrite",
+    "script:seedDevelopmentDatabase": "NODE_ENV=development APP_ENV=development ts-node ./src/scripts/seedDatabase.script.ts",
+    "dev": "NODE_ENV=development APP_ENV=development nodemon --watch \"*.ts\" --exec \"node --loader ts-node/esm\" ./src/server.ts",
+    "build": "tsc",
+    "start:production": "NODE_ENV=production APP_ENV=production node ./dist/server.js",
+    "production:debug": "NODE_ENV=development APP_ENV=production nodemon --watch \"*.ts\" --exec \"node --loader ts-node/esm\" ./src/server.ts"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/morgan": "^1.9.9",
+    "@types/node": "^20.9.0",
+    "@types/supertest": "^2.0.16",
+    "@typescript-eslint/eslint-plugin": "^6.11.0",
+    "@typescript-eslint/parser": "^6.11.0",
+    "eslint": "^8.53.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "husky": "^8.0.2",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.0.1",
+    "prettier": "^3.1.0",
+    "supertest": "^6.3.3",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.6",
+    "vitest": "^0.34.3"
+  },
+  "dependencies": {
+    "axios": "^1.6.2",
+    "chalk": "^5.3.0",
+    "compression": "^1.7.4",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-winston": "^4.2.0",
+    "http-status-codes": "^2.2.0",
+    "mongoose": "^8.0.1",
+    "user-agents": "^1.1.24",
+    "winston": "^3.11.0",
+    "winston-mongodb": "^5.1.0",
+    "zod": "^3.20.2"
+  }
+}

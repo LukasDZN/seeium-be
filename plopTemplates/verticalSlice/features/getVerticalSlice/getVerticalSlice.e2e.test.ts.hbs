@@ -1,0 +1,53 @@
+import { StatusCodes } from 'http-status-codes'
+import mongoose from 'mongoose'
+import supertest from 'supertest'
+import { beforeAll, describe, expect, test } from 'vitest'
+import { envVariables } from '../../../../../config/envVariables.js'
+import { {{pascalCase sliceName}}Model } from '../../data/{{camelCase sliceName}}.model.js'
+import app from '../../../../../app.js'
+
+// TODO: Write tests
+describe('{{camelCase featureName}}', () => {
+  beforeAll(async () => {
+    // Connect to Redis
+    // redisClient
+
+    // Connect to the database
+    const TEST_DB_URL = envVariables.MONGO_RATING_DB_URL
+    await mongoose.connect(TEST_DB_URL)
+
+    // Delete collection contents
+    await {{pascalCase sliceName}}Model.deleteMany({}).exec()
+
+    // Insert a new mock hotel mapping document
+    // const hotelMappingWriteRecord: HotelMappingWriteRecord = {
+    //   _id: new mongoose.Types.ObjectId(),
+    //   providers: {
+    //     agoda: {
+    //       id: '59852',
+    //       uid: 'hestia-hotel-ilmarine/hotel/tallinn-ee',
+    //       coordinates: {
+    //         type: 'Point',
+    //         coordinates: [24.746115, 59.444523],
+    //       },
+    //       hotelName: 'Hestia Hotel Ilmarine',
+    //     },
+    //   },
+    // }
+  })
+
+  test('should return 200', async () => {
+    const UID = '123456789'
+
+    const response = await supertest(app)
+      .get('/api/v1/{{camelCase featureName}}')
+      .query({
+        uid: UID,
+      })
+      .expect(StatusCodes.OK)
+
+    expect(response.body).toEqual({
+      uid: UID,
+    })
+  })
+})

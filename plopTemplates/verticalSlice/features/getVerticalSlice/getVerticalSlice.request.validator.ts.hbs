@@ -1,0 +1,25 @@
+import { z } from 'zod'
+import { HttpRequest } from '../../../shared/types/HttpRequest.js'
+import { {{pascalCase featureName}}RequestDto } from './{{camelCase featureName}}.dtos.js'
+
+// TODO: Change validation
+export const {{camelCase featureName}}RequestSchema = z
+  .object({
+    params: z.object({
+      uid: z.string().trim().min(1),
+    }),
+    query: z.object({}),
+    body: z.object({}),
+  })
+
+export type {{pascalCase featureName}}RequestValidator = ({
+  httpRequest,
+}: {
+  httpRequest: HttpRequest
+}) => {{pascalCase featureName}}RequestDto
+
+export const {{camelCase featureName}}RequestValidator: {{pascalCase featureName}}RequestValidator = ({
+  httpRequest,
+}) => {
+  return {{camelCase featureName}}RequestSchema.parse(httpRequest)
+}

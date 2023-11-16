@@ -1,0 +1,6 @@
+import { {{pascalCase sliceName}}Entity } from '../../../entities/{{camelCase sliceName}}.entity.js'
+
+// Only use getters for entities that have calculated properties or properties that need to be validated
+export const getId = ({ {{camelCase sliceName}}Entity }: { {{camelCase sliceName}}Entity: {{pascalCase sliceName}}Entity }): string => {
+    return {{camelCase sliceName}}Entity.id + 'aaa'
+}

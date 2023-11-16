@@ -1,0 +1,5 @@
+import { {{pascalCase sliceName}}Entity } from '../../../entities/{{camelCase sliceName}}s.entity.js'
+
+export const getEntities = ({ {{camelCase sliceName}}sEntity }: { {{camelCase sliceName}}sEntity: {{pascalCase sliceName}}sEntity }): {{pascalCase sliceName}}Entity[] => {
+    return {{camelCase sliceName}}sEntity.entities
+}

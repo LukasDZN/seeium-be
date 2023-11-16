@@ -1,0 +1,12 @@
+import express, { Router } from 'express'
+import { expressCallbackWrapper } from '../../../shared/utils/wrappers/expressCallback.wrapper.js'
+
+import { {{camelCase featureName}}Controller } from './{{camelCase featureName}}.controller.js'
+
+export const {{camelCase featureName}}Router: Router = express.Router()
+
+// TODO: Change endpoint
+{{camelCase featureName}}Router.get(
+  '/{{camelCase sliceName}}/:uid?',
+  expressCallbackWrapper({{camelCase featureName}}Controller)
+)
