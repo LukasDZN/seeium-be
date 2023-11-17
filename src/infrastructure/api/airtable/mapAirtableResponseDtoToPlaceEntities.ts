@@ -1,5 +1,6 @@
 import { PlaceEntity } from '#modules/places/entities/place.entity.js'
 import { Coordinates } from '#modules/shared/types/Coordinates.type.js'
+import { sharedUtils } from '#modules/shared/utils/shared.utils.js'
 import { AirtablePlaceRecordResponseDto } from './airtableResponse.dto.js'
 
 const parseCoordinatesFromString = (coordinateString: string): Coordinates => {
@@ -19,6 +20,7 @@ export const mapAirtableResponseToPlaceEntities = ({
 }): PlaceEntity[] => {
   const placeEntities = airtablePlaceRecordResponse.map((place) => {
     return {
+      id: sharedUtils.generateObjectIdString(),
       name: place.fields.Name,
       shortSummary: place.fields['Short summary'],
       categories: place.fields.Categories,
@@ -26,7 +28,7 @@ export const mapAirtableResponseToPlaceEntities = ({
       closingTime: place.fields['Closing Time'],
       coordinates: parseCoordinatesFromString(place.fields.Coordinates),
       rating: place.fields.Rating,
-      ticketPrice: place.fields['Ticket Price (Optional)'],
+      ticketPrice: place.fields['Ticket Price (Optional)'] ?? undefined,
       images: place.fields.Images.map((image) => ({
         id: image.id,
         width: image.width,

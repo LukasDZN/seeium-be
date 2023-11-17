@@ -2,9 +2,8 @@ import { Point } from '#modules/shared/types/mongoDb.types.js'
 
 export type PlaceWriteRecord = {
   _id: string
-  // point: { type: string; coordinates: number[] } // ? Temporary workaround to Typescript bug. Type should be Point
   point: Point
-
+  name: string
   shortSummary: string
   categories: string[]
   openingTime: number

@@ -12,6 +12,7 @@ export const mapPlaceEntityToWriteRecord = ({
     point: sharedUtils.coordinatesToMongoPoint({
       coordinates: placeEntity.coordinates,
     }),
+    name: placeEntity.name,
     shortSummary: placeEntity.shortSummary,
     categories: placeEntity.categories,
     openingTime: placeEntity.openingTime,

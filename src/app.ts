@@ -12,7 +12,9 @@ import { ErrorResponseDto } from './modules/shared/types/ErrorResponseDto.type.j
 export const app: Application = express()
 
 export const logger = makeWinstonLogger({ collectionName: 'error_logs' })
-export const airtableLogger = makeWinstonLogger({ collectionName: 'airtable_logs' })
+export const airtableLogger = makeWinstonLogger({
+  collectionName: 'airtable_logs',
+})
 export const slackLogger = makeWinstonLogger({ collectionName: 'slack_logs' })
 
 // Pretty print uncaught exceptions

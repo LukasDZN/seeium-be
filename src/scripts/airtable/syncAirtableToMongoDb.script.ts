@@ -8,24 +8,26 @@ import { PlaceModel } from '#modules/places/data/places.model.js'
 const syncAirtableToMongoDbScript = async () => {
   await connectToDb()
 
-  const airtableRecords =
+  const placeEntities =
     await externalApis.airtableApiAdapter.fetchRecordsFromTable({
       tableIdOrName: airtableConstants.places.TABLE_ID,
     })
 
-  if (!airtableRecords.length) {
+  if (!placeEntities.length) {
     throw new Error('No records retrieved from Airtable')
   }
 
   await PlaceModel.deleteMany({})
 
-  const placeWriteRecords = airtableRecords.map((airtableRecord) => {
-    return placesMapper.mapPlaceEntityToWriteRecord({ placeEntity })
+  for (const placeEntity of placeEntities) {
+    const placeWriteRecord = placesMapper.mapPlaceEntityToWriteRecord({
+      placeEntity,
+    })
+
+    await PlaceModel.create(placeWriteRecord)
+
+    console.log(`✅ ${placeWriteRecord.name} created!`)
   }
-
-  // await placesRepository.createPlaceReadRecord({ placeWriteRecord })
-
-  // console.log(`✅ ${placeWriteRecord.name} created!`)
 }
 
 console.log(`🚀 Starting ${syncAirtableToMongoDbScript.name} script...`)

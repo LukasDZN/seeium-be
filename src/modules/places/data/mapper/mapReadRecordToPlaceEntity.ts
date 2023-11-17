@@ -2,7 +2,7 @@ import { PlaceEntity } from '#modules/places/entities/place.entity.js'
 import { sharedUtils } from '#modules/shared/utils/shared.utils.js'
 import { PlaceReadRecord } from '../recordTypes/placeReadRecord.type.js'
 
-export const mapReadRecordsToPlaceEntity = ({
+export const mapReadRecordToPlaceEntity = ({
   placeReadRecord,
 }: {
   placeReadRecord: PlaceReadRecord
@@ -18,7 +18,7 @@ export const mapReadRecordsToPlaceEntity = ({
       point: placeReadRecord.point,
     }),
     rating: placeReadRecord.rating,
-    ticketPrice: placeReadRecord.ticketPrice,
+    ticketPrice: placeReadRecord.ticketPrice ?? undefined,
     images: placeReadRecord.images.map((image) => ({
       id: image.id,
       width: image.width,

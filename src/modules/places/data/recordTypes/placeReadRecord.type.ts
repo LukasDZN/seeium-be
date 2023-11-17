@@ -9,7 +9,7 @@ export type PlaceReadRecord = {
   openingTime: number
   closingTime: number
   rating: number
-  ticketPrice?: number
+  ticketPrice?: number | null
   images: {
     id: string
     width: number

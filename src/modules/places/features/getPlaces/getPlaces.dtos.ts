@@ -27,7 +27,7 @@ export type Place = {
   price: {
     isFree: boolean
   }
-  
+
   rating: {
     value: number
     count: number
@@ -35,7 +35,6 @@ export type Place = {
   photos: [
     {
       url: string
-    }
+    },
   ]
-  
 }

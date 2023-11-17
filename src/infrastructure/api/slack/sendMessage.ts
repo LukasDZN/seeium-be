@@ -15,7 +15,9 @@ export const sendMessage = async ({
   message: string
 }) => {
   if (envVariables.APP_ENV !== 'production') {
-    console.log(`🚀 Skipping sending Slack message in ${envVariables.APP_ENV} environment... Message ${message}`)
+    console.log(
+      `🚀 Skipping sending Slack message in ${envVariables.APP_ENV} environment... Message ${message}`
+    )
 
     return
   }

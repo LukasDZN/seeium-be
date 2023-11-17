@@ -34,7 +34,7 @@ const envVariablesSchema = z.object({
   MONGO_DB_URL: z.string().url(),
 
   AIRTABLE_API_KEY: z.string(),
-  
+
   REVERSE_GEOCODING_API_URL: z.string().url(),
 
   SLACK_TOKEN: z.string(),
