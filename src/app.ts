@@ -17,20 +17,6 @@ export const airtableLogger = makeWinstonLogger({
 })
 export const slackLogger = makeWinstonLogger({ collectionName: 'slack_logs' })
 
-// Pretty print uncaught exceptions
-process.on('uncaughtException', (error) => {
-  console.log(chalk.red('Uncaught exception:'))
-  console.log(error)
-  process.exit(1)
-})
-
-// Pretty print unhandled rejections
-process.on('unhandledRejection', (error) => {
-  console.log(chalk.red('Unhandled rejection:'))
-  console.log(error)
-  process.exit(1)
-})
-
 // Middleware for POST/PUT requests
 app.use(express.urlencoded({ limit: '1mb', extended: true }))
 app.use(express.json({ limit: '1mb' }))

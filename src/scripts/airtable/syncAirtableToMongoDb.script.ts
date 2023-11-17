@@ -4,6 +4,7 @@ import { airtableConstants } from '#infrastructure/api/airtable/airtable.constan
 import { externalApis } from '#infrastructure/api/externalApis.js'
 import { placesMapper } from '#modules/places/data/mapper/places.mapper.js'
 import { PlaceModel } from '#modules/places/data/places.model.js'
+import { airtableLogger } from '../../../src/app.js'
 
 const syncAirtableToMongoDbScript = async () => {
   await connectToDb()
@@ -28,6 +29,16 @@ const syncAirtableToMongoDbScript = async () => {
 
     console.log(`✅ ${placeWriteRecord.name} created!`)
   }
+
+  airtableLogger.info({
+    message: `✅ successfully synced Airtable to MongoDB!`,
+    meta: {
+      createdAt: new Date(),
+      placesCount: placeEntities.length,
+      scriptName: syncAirtableToMongoDbScript.name,
+      environment: envVariables.APP_ENV,
+    },
+  })
 }
 
 console.log(`🚀 Starting ${syncAirtableToMongoDbScript.name} script...`)

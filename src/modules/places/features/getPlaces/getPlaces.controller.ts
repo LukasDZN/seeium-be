@@ -1,10 +1,11 @@
+import { sharedConstants } from '#modules/shared/constants/shared.constants.js'
 import { Controller } from '#modules/shared/types/Controller.type.js'
+import { HttpResponse } from '#modules/shared/types/HttpResponse.js'
+import { getDistance } from 'geolib'
 import { StatusCodes } from 'http-status-codes'
+import { GetPlaceResponseDto } from './getPlaces.dtos.js'
 import { validateGetPlaceRequest } from './getPlaces.validator.js'
 import { getPlacesUseCases } from './useCases/getPlaces.useCases.js'
-import { sharedConstants } from '#modules/shared/constants/shared.constants.js'
-import { GetPlaceResponseDto } from './getPlaces.dtos.js'
-import { HttpResponse } from '#modules/shared/types/HttpResponse.js'
 
 export const getPlaceController: Controller<
   HttpResponse<GetPlaceResponseDto>
@@ -37,13 +38,28 @@ export const getPlaceController: Controller<
     return placesNotFoundHttpResponse
   }
 
+  const filteredFieldEntities = placeEntities.map((placeEntity) => {
+    const distanceToPlaceInMeters = getDistance(
+      coordinates,
+      placeEntity.coordinates
+    )
+
+    return {
+      distanceToPlaceInMeters: distanceToPlaceInMeters,
+      ...placeEntity,
+      createdBy: undefined,
+      createdAt: undefined,
+      updatedAt: undefined,
+    }
+  })
+
   const getPlacesSuccessHttpResponse = {
     headers: {
       'cache-control': `public, max-age=${sharedConstants.time.ONE_HOUR_IN_SECONDS}`,
     },
     statusCode: StatusCodes.OK,
     body: {
-      places: placeEntities,
+      places: filteredFieldEntities,
     },
   }
 

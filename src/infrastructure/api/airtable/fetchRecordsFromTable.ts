@@ -45,9 +45,7 @@ export const fetchRecordsFromTable = async ({
       allRecords.push(validAirtableResponse)
     }
 
-    console.log(
-      `📝 Page count: ${pageCount} retrieved. ${recordCount} records retrieved in total.`
-    )
+    console.log(`📝 Page count: ${pageCount} retrieved.`)
     pageCount++
 
     if (response.data.offset) {
