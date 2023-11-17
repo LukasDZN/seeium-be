@@ -1,40 +1,45 @@
+import { PlaceEntity } from '#modules/places/entities/place.entity.js'
 import { z } from 'zod'
 import { GetPlaceRequestSchema } from './getPlaces.validator.js'
-import { Coordinates } from '#modules/shared/types/Coordinates.type.js'
 
 export type GetPlaceRequestDto = z.infer<typeof GetPlaceRequestSchema>
 
 export type GetPlaceResponseDto = {
-  places: Place[]
+  places: PlaceEntity[]
 }
 
-export type Place = {
-  name: {
-    en: {
-      full: string
-    }
-  }
-  categories: string[]
-  location: {
-    distance: {
-      meters: number
-    }
-    coordinates: Coordinates
-    country: string
-    city: string
-    address: string
-  }
-  price: {
-    isFree: boolean
-  }
+// More sophisticated version of the above:
+// export type GetPlaceResponseDto = {
+//   places: Place[]
+// }
 
-  rating: {
-    value: number
-    count: number
-  }
-  photos: [
-    {
-      url: string
-    },
-  ]
-}
+// export type Place = {
+//   name: {
+//     en: {
+//       full: string
+//     }
+//   }
+//   categories: string[]
+//   location: {
+//     distance: {
+//       meters: number
+//     }
+//     coordinates: Coordinates
+//     country: string
+//     city: string
+//     address: string
+//   }
+//   price: {
+//     isFree: boolean
+//   }
+
+//   rating: {
+//     value: number
+//     count: number
+//   }
+//   photos: [
+//     {
+//       url: string
+//     },
+//   ]
+// }

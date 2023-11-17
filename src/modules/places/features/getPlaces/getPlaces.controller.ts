@@ -3,8 +3,12 @@ import { StatusCodes } from 'http-status-codes'
 import { validateGetPlaceRequest } from './getPlaces.validator.js'
 import { getPlacesUseCases } from './useCases/getPlaces.useCases.js'
 import { sharedConstants } from '#modules/shared/constants/shared.constants.js'
+import { GetPlaceResponseDto } from './getPlaces.dtos.js'
+import { HttpResponse } from '#modules/shared/types/HttpResponse.js'
 
-export const getPlaceController: Controller = async ({ httpRequest }) => {
+export const getPlaceController: Controller<
+  HttpResponse<GetPlaceResponseDto>
+> = async ({ httpRequest }) => {
   const request = validateGetPlaceRequest({ httpRequest })
 
   const { latitude, longitude, searchRadiusInMeters, offset, limit } =
