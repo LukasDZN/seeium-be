@@ -9,7 +9,7 @@ const { combine, timestamp, json, printf, errors, prettyPrint, cli } =
 export const makeWinstonLogger = ({
   collectionName,
 }: {
-  collectionName?: string
+  collectionName: string
 }): Logger => {
   const dbConnection = mongoose.connection.getClient()
   // Promise is needed because the library expects a promise
@@ -25,7 +25,7 @@ export const makeWinstonLogger = ({
     new winston.transports.MongoDB({
       db: dbConnectionPromise,
       level: envVariables.ERROR_LOG_LEVEL,
-      collection: collectionName ?? 'error_logs',
+      collection: collectionName,
       metaKey: 'meta',
       decolorize: true,
       options: {

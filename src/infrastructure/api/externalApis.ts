@@ -1,5 +1,9 @@
-import { reverseGeocoderApi } from './reverseGeocoding/reverseGeocodingApi.js'
+import { airtableApiAdapter } from './airtable/airtableApi.adapter.js'
+import { reverseGeocoderApiAdapter } from './reverseGeocoding/reverseGeocodingApi.adapter.js'
+import { slackApiAdapter } from './slack/slackApi.adapter.js'
 
 export const externalApis = {
-  reverseGeocoderApi,
+  reverseGeocoderApiAdapter,
+  airtableApiAdapter,
+  slackApiAdapter,
 } as const

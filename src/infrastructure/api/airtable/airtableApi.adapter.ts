@@ -1,5 +1,5 @@
 import { fetchRecordsFromTable } from './fetchRecordsFromTable.js'
 
-export const airtableApisAdapter = {
+export const airtableApiAdapter = {
   fetchRecordsFromTable,
 } as const

@@ -1,5 +1,5 @@
-import { getPlaceEntitiesByCoordinates } from './getPlacesByCoordinates.useCase.js'
+// import { getPlaceEntitiesByCoordinates } from './getPlacesByCoordinates.useCase.js'
 
-export const getPlacesUseCases = {
-  getPlaceEntitiesByCoordinates,
-} as const
+// export const getPlacesUseCases = {
+//   getPlaceEntitiesByCoordinates,
+// } as const

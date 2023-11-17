@@ -37,6 +37,8 @@ const envVariablesSchema = z.object({
   
   REVERSE_GEOCODING_API_URL: z.string().url(),
 
+  SLACK_TOKEN: z.string(),
+
   // REDIS_URL: z.string(),
 
   // TYPESENSE_URL: z.string().optional(),

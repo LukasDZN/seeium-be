@@ -1,5 +1,7 @@
-import { readRecordToPlaceEntity } from './mapReadRecordToPlaceEntity.js'
+import { mapPlaceEntityToWriteRecord } from './mapPlaceEntityToWriteRecord.js'
+import { mapReadRecordsToPlaceEntity } from './mapReadRecordToPlaceEntity.js'
 
 export const placesMapper = {
-  readRecordToPlaceEntity,
+  mapPlaceEntityToWriteRecord,
+  mapReadRecordsToPlaceEntity,
 } as const

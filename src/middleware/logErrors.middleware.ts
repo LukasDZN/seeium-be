@@ -9,7 +9,7 @@ export const logErrorsMiddleware = (
   next: NextFunction // eslint-disable-line @typescript-eslint/no-unused-vars
   // next param is required for Express to recognize this as an error handler
 ) => {
-  const winstonLogger = makeWinstonLogger({})
+  const winstonLogger = makeWinstonLogger({ collectionName: 'logs' })
 
   const requestLog = {
     // Note: or just ...request?

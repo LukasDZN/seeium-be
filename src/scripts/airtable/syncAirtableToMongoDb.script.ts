@@ -1,41 +1,39 @@
-import Airtable from 'airtable'
 import { envVariables } from '#config/envVariables.js'
-import { makePlaceEntity } from '#modules/places/entities/place.entity.js'
-import { placesMapper } from '#modules/places/data/mapper/places.mapper.js'
-import { placesRepository } from '#modules/places/data/repository/places.repository.js'
 import { connectToDb } from '#config/mongodb.js'
+import { airtableConstants } from '#infrastructure/api/airtable/airtable.constants.js'
+import { externalApis } from '#infrastructure/api/externalApis.js'
+import { placesMapper } from '#modules/places/data/mapper/places.mapper.js'
 import { PlaceModel } from '#modules/places/data/places.model.js'
 
-/**
- * TODO:
- * - Fetch data from airtable
- * - For each result, create a place document
- */
-
-
-
-const syncAirtableToMongoDb = async () => {
+const syncAirtableToMongoDbScript = async () => {
   await connectToDb()
+
+  const airtableRecords =
+    await externalApis.airtableApiAdapter.fetchRecordsFromTable({
+      tableIdOrName: airtableConstants.places.TABLE_ID,
+    })
+
+  if (!airtableRecords.length) {
+    throw new Error('No records retrieved from Airtable')
+  }
 
   await PlaceModel.deleteMany({})
 
-  // airtable.
+  const placeWriteRecords = airtableRecords.map((airtableRecord) => {
+    return placesMapper.mapPlaceEntityToWriteRecord({ placeEntity })
+  }
 
-  const placeEntity = makePlaceEntity({})
+  // await placesRepository.createPlaceReadRecord({ placeWriteRecord })
 
-  const placeWriteRecord = placesMapper.mapPlaceEntityToWriteRecord({ placeEntity })
-
-  await placesRepository.createPlaceReadRecord({ placeWriteRecord })
-
-  console.log(`✅ ${placeWriteRecord.name} created!`)
+  // console.log(`✅ ${placeWriteRecord.name} created!`)
 }
 
-console.log(`🚀 Starting ${syncAirtableToMongoDb.name} script...`)
+console.log(`🚀 Starting ${syncAirtableToMongoDbScript.name} script...`)
 
-await syncAirtableToMongoDb()
+await syncAirtableToMongoDbScript()
 
 console.log(
-  `✅ ${syncAirtableToMongoDb.name} script completed! Environment: '${envVariables.APP_ENV}'!`
+  `✅ ${syncAirtableToMongoDbScript.name} script completed! Environment: '${envVariables.APP_ENV}'!`
 )
 
 process.exit(0)

@@ -11,7 +11,23 @@ import { ErrorResponseDto } from './modules/shared/types/ErrorResponseDto.type.j
 
 export const app: Application = express()
 
-export const logger = makeWinstonLogger({})
+export const logger = makeWinstonLogger({ collectionName: 'error_logs' })
+export const airtableLogger = makeWinstonLogger({ collectionName: 'airtable_logs' })
+export const slackLogger = makeWinstonLogger({ collectionName: 'slack_logs' })
+
+// Pretty print uncaught exceptions
+process.on('uncaughtException', (error) => {
+  console.log(chalk.red('Uncaught exception:'))
+  console.log(error)
+  process.exit(1)
+})
+
+// Pretty print unhandled rejections
+process.on('unhandledRejection', (error) => {
+  console.log(chalk.red('Unhandled rejection:'))
+  console.log(error)
+  process.exit(1)
+})
 
 // Middleware for POST/PUT requests
 app.use(express.urlencoded({ limit: '1mb', extended: true }))
