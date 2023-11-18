@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express'
-import { generalLogger } from '../../src/server.js'
 import { HttpRequest } from '../modules/shared/types/HttpRequest.js'
+import { generalLogger } from '../server.js'
 
 export const logErrorsMiddleware = (
   error: Error,
