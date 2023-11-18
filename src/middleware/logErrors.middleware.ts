@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express'
-import { makeWinstonLogger } from '../loggers/makeWinston.logger.js'
+import { generalLogger } from '../../src/server.js'
 import { HttpRequest } from '../modules/shared/types/HttpRequest.js'
 
 export const logErrorsMiddleware = (
@@ -9,15 +9,13 @@ export const logErrorsMiddleware = (
   next: NextFunction // eslint-disable-line @typescript-eslint/no-unused-vars
   // next param is required for Express to recognize this as an error handler
 ) => {
-  const winstonLogger = makeWinstonLogger({ collectionName: 'logs' })
-
   const requestLog = {
     // Note: or just ...request?
     request: {
       ip: req.ip,
       path: req.path,
       headers: {
-        uid: req.get('uid') ?? '',
+        correlationId: req.get('uid') ?? '',
         'Content-Type': req.get('Content-Type') ?? '',
         Referer: req.get('Referer') ?? '',
         'User-Agent': req.get('User-Agent') ?? '',
@@ -31,7 +29,7 @@ export const logErrorsMiddleware = (
   }
 
   if (error instanceof Error) {
-    winstonLogger.error({
+    generalLogger.error({
       message: error.name,
       meta: {
         req: requestLog,
@@ -42,7 +40,7 @@ export const logErrorsMiddleware = (
       },
     })
   } else {
-    winstonLogger.error({
+    generalLogger.error({
       message: 'Unknown error',
       meta: {
         req: requestLog,

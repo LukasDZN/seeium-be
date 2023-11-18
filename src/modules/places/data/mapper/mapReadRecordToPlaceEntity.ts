@@ -1,5 +1,5 @@
-import { PlaceEntity } from '#modules/places/entities/place.entity.js'
-import { sharedUtils } from '#modules/shared/utils/shared.utils.js'
+import { sharedUtils } from '../../../shared/utils/shared.utils.js'
+import { PlaceEntity } from '../../entities/place.entity.js'
 import { PlaceReadRecord } from '../recordTypes/placeReadRecord.type.js'
 
 export const mapReadRecordToPlaceEntity = ({

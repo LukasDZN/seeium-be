@@ -1,4 +1,4 @@
-import { logger } from '../../../../app.js'
+import { generalLogger } from '../../../../server.js'
 import { PlaceModel } from '../places.model.js'
 import { PlaceReadRecord } from '../recordTypes/placeReadRecord.type.js'
 import { PlaceWriteRecord } from '../recordTypes/placeWriteRecord.type.js'
@@ -12,9 +12,9 @@ export const savePlaceReadRecord = async ({
     await PlaceModel.create(placesWriteRecord)
 
   if (createdPlaceReadRecord) {
-    logger.debug(`✅ Place document created`)
+    generalLogger.debug(`✅ Place document created`)
   } else {
-    logger.debug(`❌ Place document not created`)
+    generalLogger.debug(`❌ Place document not created`)
   }
 
   return createdPlaceReadRecord

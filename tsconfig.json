@@ -1,11 +1,5 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-        "#modules/*": ["./src/modules/*"],
-        "#config/*": ["./src/config/*"],
-        "#infrastructure/*": ["./src/infrastructure/*"],
-    },
 
     "noErrorTruncation": true,
 

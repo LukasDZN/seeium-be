@@ -1,6 +1,6 @@
-import { PlaceEntity } from '#modules/places/entities/place.entity.js'
-import { Coordinates } from '#modules/shared/types/Coordinates.type.js'
-import { sharedUtils } from '#modules/shared/utils/shared.utils.js'
+import { PlaceEntity } from '../../../modules/places/entities/place.entity.js'
+import { Coordinates } from '../../../modules/shared/types/Coordinates.type.js'
+import { sharedUtils } from '../../../modules/shared/utils/shared.utils.js'
 import { AirtablePlaceRecordResponseDto } from './airtableResponse.dto.js'
 
 const parseCoordinatesFromString = (coordinateString: string): Coordinates => {

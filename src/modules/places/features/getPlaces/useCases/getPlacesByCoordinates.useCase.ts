@@ -1,7 +1,7 @@
-import { placesMapper } from '#modules/places/data/mapper/places.mapper.js'
-import { placesRepository } from '#modules/places/data/repository/places.repository.js'
-import { PlaceEntity } from '#modules/places/entities/place.entity.js'
-import { Coordinates } from '#modules/shared/types/Coordinates.type.js'
+import { Coordinates } from '../../../../shared/types/Coordinates.type.js'
+import { placesMapper } from '../../../data/mapper/places.mapper.js'
+import { placesRepository } from '../../../data/repository/places.repository.js'
+import { PlaceEntity } from '../../../entities/place.entity.js'
 
 type GetPlaceEntitiesByCoordinatesUseCase = ({
   coordinates,

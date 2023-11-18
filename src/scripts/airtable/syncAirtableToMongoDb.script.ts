@@ -1,10 +1,10 @@
-import { envVariables } from '#config/envVariables.js'
-import { connectToDb } from '#config/mongodb.js'
-import { airtableConstants } from '#infrastructure/api/airtable/airtable.constants.js'
-import { externalApis } from '#infrastructure/api/externalApis.js'
-import { placesMapper } from '#modules/places/data/mapper/places.mapper.js'
-import { PlaceModel } from '#modules/places/data/places.model.js'
-import { airtableLogger } from '../../../src/app.js'
+import { airtableLogger } from '../../../src/server.js'
+import { envVariables } from '../../config/envVariables.js'
+import { connectToDb } from '../../config/mongodb.js'
+import { airtableConstants } from '../../infrastructure/api/airtable/airtable.constants.js'
+import { externalApis } from '../../infrastructure/api/externalApis.js'
+import { placesMapper } from '../../modules/places/data/mapper/places.mapper.js'
+import { PlaceModel } from '../../modules/places/data/places.model.js'
 
 const syncAirtableToMongoDbScript = async () => {
   await connectToDb()

@@ -1,4 +1,4 @@
-import { Coordinates } from '#modules/shared/types/Coordinates.type.js'
+import { Coordinates } from '../../shared/types/Coordinates.type.js'
 
 export type PlaceEntity = {
   id: string

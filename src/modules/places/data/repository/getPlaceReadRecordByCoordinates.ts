@@ -1,5 +1,5 @@
-import { Coordinates } from '#modules/shared/types/Coordinates.type.js'
-import { logger } from '../../../../app.js'
+import { generalLogger } from '../../../../server.js'
+import { Coordinates } from '../../../shared/types/Coordinates.type.js'
 import { PlaceModel } from '../places.model.js'
 import { PlaceReadRecord } from '../recordTypes/placeReadRecord.type.js'
 
@@ -37,12 +37,12 @@ export const getPlaceReadRecordsByCoordinates = async ({
     .exec()
 
   if (!placeReadRecords.length) {
-    logger.debug(`❌ placeReadRecords not found by coordinates`)
+    generalLogger.debug(`❌ placeReadRecords not found by coordinates`)
 
     return []
   }
 
-  logger.debug(`✅ placeReadRecords found by coordinates`)
+  generalLogger.debug(`✅ placeReadRecords found by coordinates`)
 
   return placeReadRecords
 }

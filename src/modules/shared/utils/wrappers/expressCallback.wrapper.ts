@@ -11,7 +11,7 @@ export const expressCallbackWrapper = (
 ) => {
   return async (req: Request, res: Response, next: NextFunction) => {
     // Random UID for each request for logging/debugging purposes
-    const uid = crypto.randomUUID()
+    const correlationId = crypto.randomUUID()
 
     const httpRequest: HttpRequest = {
       body: req.body,
@@ -21,14 +21,14 @@ export const expressCallbackWrapper = (
       method: req.method,
       path: req.path,
       headers: {
-        uid,
+        correlationId,
         'Content-Type': req.get('Content-Type') ?? '',
         Referer: req.get('Referer') ?? '',
         'User-Agent': req.get('User-Agent') ?? '',
       },
     }
 
-    res.set({ uid })
+    res.set({ correlationId })
 
     try {
       const httpResponse = await controller({ httpRequest })

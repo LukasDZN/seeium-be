@@ -1,12 +1,12 @@
 export type HttpRequest = {
+  ip?: string
   body: unknown
   query: unknown
   params: unknown
-  ip?: string
   method: string
   path: string
   headers: {
-    uid: string
+    correlationId: string
     'Content-Type': string
     Referer: string
     'User-Agent': string

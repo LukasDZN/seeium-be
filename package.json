@@ -14,11 +14,6 @@
     "node": "20.9.0"
   },
   "type": "module",
-  "imports": {
-    "#modules/*": "./dist/modules/*",
-    "#config/*": "./dist/config/*",
-    "#infrastructure/*": "./dist/infrastructure/*"
-  },
   "scripts": {
     "prepare": "husky install",
     "lint": "eslint --ext .ts .",

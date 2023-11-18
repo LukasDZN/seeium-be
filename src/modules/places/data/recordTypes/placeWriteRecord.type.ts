@@ -1,4 +1,4 @@
-import { Point } from '#modules/shared/types/mongoDb.types.js'
+import { Point } from '../../../shared/types/mongoDb.types.js'
 
 export type PlaceWriteRecord = {
   _id: string

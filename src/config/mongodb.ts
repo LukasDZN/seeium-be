@@ -11,7 +11,7 @@ export const connectToDb = async () => {
   let reconnectionCount = 1
   let reconnectionDelay = 3000
 
-  const dbConnection = await attemptConnectionToDb(envVariables.MONGO_DB_URL)
+  // Initialize mongoose event listeners
 
   mongoose.connection.on('connected', () => {
     console.log(`MongoDB connected ${chalk.green('successfully')}!`)
@@ -46,6 +46,8 @@ export const connectToDb = async () => {
   mongoose.connection.on('error', (error) => {
     console.log(`MongoDB ${chalk.red('connection error')}: ${error}`)
   })
+
+  const dbConnection = await attemptConnectionToDb(envVariables.MONGO_DB_URL)
 
   return dbConnection
 }

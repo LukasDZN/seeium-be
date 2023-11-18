@@ -1,9 +1,9 @@
-import { envVariables } from '#config/envVariables.js'
 import axios from 'axios'
 import { airtableConstants } from './airtable.constants.js'
 import { AirtablePlaceRecordResponseDto } from './airtableResponse.dto.js'
 import { validateAirtableResponseDto } from './airtableResponse.dto.validator.js'
 import { mapAirtableResponseToPlaceEntities } from './mapAirtableResponseDtoToPlaceEntities.js'
+import { envVariables } from '../../../config/envVariables.js'
 
 const MAX_RECORDS = 100 // Max allowed by Airtable API
 

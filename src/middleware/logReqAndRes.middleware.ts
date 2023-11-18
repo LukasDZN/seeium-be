@@ -1,11 +1,9 @@
 import chalk from 'chalk'
 import expressWinston from 'express-winston'
+import mongoose from 'mongoose'
 import winston from 'winston'
 import 'winston-mongodb'
 import { envVariables } from '../config/envVariables.js'
-import { connectToDb } from '../config/mongodb.js'
-
-const db = connectToDb()
 
 const { combine, timestamp, json, errors, cli } = winston.format
 
@@ -29,7 +27,11 @@ const LOGGER_MESSAGE = `${chalk
  *
  * @return Return an express-winston logger instance
  */
-export const logReqAndResMiddleware = () => {
+export const makeLogReqAndResMiddleware = () => {
+  const dbConnection = mongoose.connection.getClient()
+  // Promise is needed because the library expects a promise
+  const dbConnectionPromise = Promise.resolve(dbConnection)
+
   // Create logger and specify format for transports to use
   const logger = winston.createLogger({
     format: combine(timestamp(), json(), errors({ stack: true })),
@@ -45,7 +47,7 @@ export const logReqAndResMiddleware = () => {
    */
   logger.add(
     new winston.transports.MongoDB({
-      db,
+      db: dbConnectionPromise,
       level: envVariables.REQ_RES_LOG_LEVEL,
       collection: 'req_and_res_logs',
       metaKey: 'meta',

@@ -1,7 +1,6 @@
-import { PlaceEntity } from '#modules/places/entities/place.entity.js'
 import { z } from 'zod'
+import { Coordinates } from '../../../shared/types/Coordinates.type.js'
 import { GetPlaceRequestSchema } from './getPlaces.validator.js'
-import { Coordinates } from '#modules/shared/types/Coordinates.type.js'
 
 export type GetPlaceRequestDto = z.infer<typeof GetPlaceRequestSchema>
 
