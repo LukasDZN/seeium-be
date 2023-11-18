@@ -15,9 +15,9 @@
   },
   "type": "module",
   "imports": {
-    "#modules/*": "./src/modules/*",
-    "#config/*": "./src/config/*",
-    "#infrastructure/*": "./src/infrastructure/*"
+    "#modules/*": "./dist/modules/*",
+    "#config/*": "./dist/config/*",
+    "#infrastructure/*": "./dist/infrastructure/*"
   },
   "scripts": {
     "prepare": "husky install",
