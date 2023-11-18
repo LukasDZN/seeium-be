@@ -4,4 +4,4 @@ import { getPlaceController } from './getPlaces.controller.js'
 
 export const getPlaces: Router = express.Router()
 
-getPlaces.get('/places', expressCallbackWrapper(getPlaceController))
+getPlaces.get('', expressCallbackWrapper(getPlaceController))

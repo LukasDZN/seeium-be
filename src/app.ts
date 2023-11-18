@@ -2,12 +2,15 @@ import chalk from 'chalk'
 import express, { Application, NextFunction, Request, Response } from 'express'
 import { StatusCodes } from 'http-status-codes'
 import morgan from 'morgan'
+import routeCache from 'route-cache'
 import { envVariables } from './config/envVariables.js'
 import { externalApis } from './infrastructure/api/externalApis.js'
 import { logErrorsMiddleware } from './middleware/logErrors.middleware.js'
 import { makeLogReqAndResMiddleware } from './middleware/logReqAndRes.middleware.js'
-import { router } from './modules/router.js'
+import { getPlaces } from './modules/places/features/getPlaces/getPlaces.router.js'
+import { sharedConstants } from './modules/shared/constants/shared.constants.js'
 import { ErrorResponseDto } from './modules/shared/types/ErrorResponseDto.type.js'
+import { generalLogger } from './server.js'
 
 export const makeApp = () => {
   const app: Application = express()
@@ -55,12 +58,29 @@ export const makeApp = () => {
   app.use(logReqAndResMiddleware)
 
   // Routes
-  app.use('/api', router)
+
+  app.use(
+    '/api/places',
+    routeCache.cacheSeconds(
+      sharedConstants.time.FIVE_MINUTES_IN_SECONDS,
+      (req: Request) => {
+        generalLogger.debug(
+          '✅ Either caching initial response, or returning cached response for: ' +
+            req.url
+        )
+
+        return req.originalUrl
+      }
+    ),
+    getPlaces
+  )
+
   app.get('/api/healthCheck', (req, res) => {
     res.json({
       status: 'success',
     })
   })
+
   app.use(express.static('src/public'))
 
   // Send a 404 error if no route is matched
