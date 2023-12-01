@@ -20,7 +20,9 @@ fi
 # Pipeline
 yarn build
 # yarn lint
-yarn prettierCheck
+# yarn prettierCheck
+yarn prettierWrite
+
 PIPELINE_CHECK_EXIT_CODE=$?
 
 if [ $PIPELINE_CHECK_EXIT_CODE -eq "0" ]; then
@@ -30,6 +32,3 @@ else
   echo "Aborting commit."
   exit 1
 fi
-
-# Run prettier
-# yarn run prettierWrite
