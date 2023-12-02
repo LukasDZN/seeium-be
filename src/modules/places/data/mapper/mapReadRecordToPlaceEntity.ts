@@ -12,38 +12,43 @@ export const mapReadRecordToPlaceEntity = ({
     name: placeReadRecord.name,
     shortSummary: placeReadRecord.shortSummary,
     categories: placeReadRecord.categories,
-    openingTime: placeReadRecord.openingTime,
-    closingTime: placeReadRecord.closingTime,
+    openingTime: placeReadRecord.openingTime ?? undefined,
+    closingTime: placeReadRecord.closingTime ?? undefined,
     coordinates: sharedUtils.mongoPointToCoordinates({
       point: placeReadRecord.point,
     }),
-    rating: placeReadRecord.rating,
+    rating: placeReadRecord.rating ?? undefined,
     ticketPrice: placeReadRecord.ticketPrice ?? undefined,
+    priceRange: placeReadRecord.priceRange ?? undefined,
     images: placeReadRecord.images.map((image) => ({
       id: image.id,
-      width: image.width,
-      height: image.height,
+      cloudinary: {
+        id: image.cloudinary.id,
+        url: image.cloudinary.url,
+      },
       url: image.url,
       filename: image.filename,
-      size: image.size,
-      type: image.type,
-      thumbnails: {
-        small: {
-          url: image.thumbnails.small.url,
-          width: image.thumbnails.small.width,
-          height: image.thumbnails.small.height,
-        },
-        large: {
-          url: image.thumbnails.large.url,
-          width: image.thumbnails.large.width,
-          height: image.thumbnails.large.height,
-        },
-        full: {
-          url: image.thumbnails.full.url,
-          width: image.thumbnails.full.width,
-          height: image.thumbnails.full.height,
-        },
-      },
+      // width: image.width,
+      // height: image.height,
+      // size: image.size,
+      // type: image.type,
+      // thumbnails: {
+      //   small: {
+      //     url: image.thumbnails.small.url,
+      //     width: image.thumbnails.small.width,
+      //     height: image.thumbnails.small.height,
+      //   },
+      //   large: {
+      //     url: image.thumbnails.large.url,
+      //     width: image.thumbnails.large.width,
+      //     height: image.thumbnails.large.height,
+      //   },
+      //   full: {
+      //     url: image.thumbnails.full.url,
+      //     width: image.thumbnails.full.width,
+      //     height: image.thumbnails.full.height,
+      //   },
+      // },
     })),
     createdBy: {
       id: placeReadRecord.createdBy.id,

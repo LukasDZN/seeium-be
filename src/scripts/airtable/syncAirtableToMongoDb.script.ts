@@ -12,6 +12,7 @@ const syncAirtableToMongoDbScript = async () => {
   const placeEntities =
     await externalApis.airtableApiAdapter.fetchRecordsFromTable({
       tableIdOrName: airtableConstants.places.TABLE_ID,
+      viewId: airtableConstants.places.VIEW_ID,
     })
 
   if (!placeEntities.length) {

@@ -6,35 +6,41 @@ export type PlaceWriteRecord = {
   name: string
   shortSummary: string
   categories: string[]
-  openingTime: number
-  closingTime: number
-  rating: number
+  open24Hours?: boolean
+  openingTime?: number
+  closingTime?: number
+  rating?: number
   ticketPrice?: number
+  priceRange?: string
   images: {
     id: string
-    width: number
-    height: number
+    cloudinary: {
+      id: string
+      url: string
+    }
     url: string
     filename: string
-    size: number
-    type: string
-    thumbnails: {
-      small: {
-        url: string
-        width: number
-        height: number
-      }
-      large: {
-        url: string
-        width: number
-        height: number
-      }
-      full: {
-        url: string
-        width: number
-        height: number
-      }
-    }
+    // width: number
+    // height: number
+    // size: number
+    // type: string
+    // thumbnails: {
+    //   small: {
+    //     url: string
+    //     width: number
+    //     height: number
+    //   }
+    //   large: {
+    //     url: string
+    //     width: number
+    //     height: number
+    //   }
+    //   full: {
+    //     url: string
+    //     width: number
+    //     height: number
+    //   }
+    // }
   }[]
   createdBy: {
     id: string

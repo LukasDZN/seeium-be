@@ -9,9 +9,11 @@ const MAX_RECORDS = 100 // Max allowed by Airtable API
 
 export const fetchRecordsFromTable = async ({
   tableIdOrName,
+  viewId,
   maxRecords = MAX_RECORDS,
 }: {
   tableIdOrName: string
+  viewId?: string
   maxRecords?: number
 }) => {
   if (maxRecords > 100 || maxRecords < 1) {
@@ -24,8 +26,8 @@ export const fetchRecordsFromTable = async ({
 
   const url = `https://api.airtable.com/v0/${airtableConstants.BASE}/${tableIdOrName}`
   const params = {
+    view: viewId,
     maxRecords,
-    // view: 'Grid view',
   }
   const headers = {
     Authorization: `Bearer ${envVariables.AIRTABLE_API_KEY}`,
@@ -35,6 +37,9 @@ export const fetchRecordsFromTable = async ({
 
   while (response.data.records.length > 0) {
     for (const record of response.data.records) {
+      console.log('\n Record:')
+      console.log(JSON.stringify(record, null, 2))
+
       const validAirtableResponse = validateAirtableResponseDto({
         airtableResponseDto: record,
       })

@@ -13,20 +13,33 @@ const ThumbnailSchema = new mongoose.Schema(
 const ImageSchema = new mongoose.Schema(
   {
     id: { type: String, required: true },
-    width: { type: Number, required: true },
-    height: { type: Number, required: true },
-    url: { type: String, required: true },
-    filename: { type: String, required: true },
-    size: { type: Number, required: true },
-    type: { type: String, required: true },
-    thumbnails: {
+    cloudinary: {
       type: {
-        small: { type: ThumbnailSchema, required: true },
-        large: { type: ThumbnailSchema, required: true },
-        full: { type: ThumbnailSchema, required: true },
+        id: {
+          type: String,
+          required: true,
+        },
+        url: {
+          type: String,
+          required: true,
+        },
       },
       required: true,
     },
+    url: { type: String, required: true },
+    filename: { type: String, required: true },
+    // width: { type: Number, required: true },
+    // height: { type: Number, required: true },
+    // size: { type: Number, required: true },
+    // type: { type: String, required: true },
+    // thumbnails: {
+    //   type: {
+    //     small: { type: ThumbnailSchema, required: true },
+    //     large: { type: ThumbnailSchema, required: true },
+    //     full: { type: ThumbnailSchema, required: true },
+    //   },
+    //   required: true,
+    // },
   },
   { _id: false }
 )
@@ -44,11 +57,13 @@ export const PlaceSchema = new mongoose.Schema({
   name: { type: String, required: true },
   shortSummary: { type: String, required: true },
   categories: [{ type: String, required: true }],
-  openingTime: { type: Number, required: true },
-  closingTime: { type: Number, required: true },
+  open24Hours: { type: Boolean, required: false }, // ! optional
+  openingTime: { type: Number, required: false }, // ! optional
+  closingTime: { type: Number, required: false }, // ! optional
   point: { type: PointSchema, required: true },
   ticketPrice: { type: Number, required: false }, // ! optional
-  rating: { type: Number, required: true },
+  priceRange: { type: String, required: false }, // ! optional
+  rating: { type: Number, required: false }, // ! optional
   images: { type: [ImageSchema], required: true },
   createdBy: { type: CreatedBySchema, required: true },
   createdAt: { type: Date, required: true },

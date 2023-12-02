@@ -5,6 +5,10 @@ export const airtableResponseDtoExample = {
     Images: [
       {
         id: 'attakwWAu56g9bJb5',
+        airtable: {
+          id: 'attakwWAu56g9bJb5',
+          url: 'https://dl.airtable.com/.attachments/4b4b4b4b/2b9e2b4b4b4b4b4b/5b4b4b4b4b4b4b.jpeg',
+        },
         width: 1800,
         height: 1200,
         url: 'https://v5.airtableusercontent.com/v2/23/23/1700280000000/nube8WJDIbxx4rTeSP5R3w/xmq5oNFkCJmypeA6QO1oFEsQLV0w0RhmutYQkzM0Nk-_eeLQaUKkreo8Qj7_0dXoAM-kbEn2bLODOcTGOGwb-34G0PxyJxJVkCe0MVA4JMCYC558iYDFqHMkKm-iM8-7nzrisWjQJvt1E7MPGcs0nA/G9r9lwDWfERWU6mvMkbJctABh2SAlgPyXIkOfN61k8k',
@@ -37,6 +41,7 @@ export const airtableResponseDtoExample = {
       "Gediminas Castle Tower is a historic landmark offering panoramic city views and a glimpse into Lithuania's medieval past.",
     Coordinates: '54.686986927163595, 25.291024087456314',
     'Opening Time': 36000,
+    'Open 24 hours': false,
     'Created By': {
       id: 'usr1ttUfTyglCnoJ0',
       email: 'obaid50432@gmail.com',
