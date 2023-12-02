@@ -59,7 +59,7 @@ export const mapAirtableResponseToPlaceEntities = async ({
         name: place.fields.Name,
         shortSummary: place.fields['Short summary'],
         categories: place.fields.Categories,
-        open24Hours: place.fields['Open 24 hours'],
+        open24Hours: place.fields['Open 24 Hours'],
         openingTime: place.fields['Opening Time'],
         closingTime: place.fields['Closing Time'],
         coordinates: parseCoordinatesFromString(place.fields.Coordinates),

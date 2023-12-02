@@ -35,7 +35,7 @@ export const AirtableResponseDtoSchema = z.object({
       Name: z.string(),
       'Short summary': z.string(),
       Categories: z.array(z.string()),
-      'Open 24 hours': z.boolean().optional(),
+      'Open 24 Hours': z.boolean().optional(),
       'Opening Time': z.number().optional(),
       'Closing Time': z.number().optional(),
       Coordinates: z.string().refine(

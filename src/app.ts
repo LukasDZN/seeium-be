@@ -10,6 +10,7 @@ import { makeLogReqAndResMiddleware } from './middleware/logReqAndRes.middleware
 import { getPlaces } from './modules/places/features/getPlaces/getPlaces.router.js'
 import { sharedConstants } from './modules/shared/constants/shared.constants.js'
 import { ErrorResponseDto } from './modules/shared/types/ErrorResponseDto.type.js'
+import { syncAirtableToMongoDb } from './scripts/airtable/syncAirtableToMongoDb.util.js'
 import { generalLogger } from './server.js'
 
 export const makeApp = () => {
@@ -74,6 +75,19 @@ export const makeApp = () => {
     ),
     getPlaces
   )
+
+  app.get('/api/syncAirtable', async (req, res) => {
+    try {
+      const resultLog = await syncAirtableToMongoDb({
+        syncTriggerSource: 'By hitting the /api/syncAirtable endpoint',
+      })
+
+      res.json(resultLog)
+    } catch (error) {
+      console.log(error)
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(error)
+    }
+  })
 
   app.get('/api/healthCheck', (req, res) => {
     res.json({

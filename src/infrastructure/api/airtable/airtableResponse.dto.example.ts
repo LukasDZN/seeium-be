@@ -41,7 +41,7 @@ export const airtableResponseDtoExample = {
       "Gediminas Castle Tower is a historic landmark offering panoramic city views and a glimpse into Lithuania's medieval past.",
     Coordinates: '54.686986927163595, 25.291024087456314',
     'Opening Time': 36000,
-    'Open 24 hours': false,
+    'Open 24 Hours': false,
     'Created By': {
       id: 'usr1ttUfTyglCnoJ0',
       email: 'obaid50432@gmail.com',
