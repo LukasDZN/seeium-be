@@ -12,6 +12,7 @@ export const mapReadRecordToPlaceEntity = ({
     name: placeReadRecord.name,
     shortSummary: placeReadRecord.shortSummary,
     categories: placeReadRecord.categories,
+    open24Hours: placeReadRecord.open24Hours ?? undefined,
     openingTime: placeReadRecord.openingTime ?? undefined,
     closingTime: placeReadRecord.closingTime ?? undefined,
     coordinates: sharedUtils.mongoPointToCoordinates({
