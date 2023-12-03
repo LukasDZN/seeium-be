@@ -1,16 +1,16 @@
 import { getDistance } from 'geolib'
 import { StatusCodes } from 'http-status-codes'
-import { GetPlaceResponseDto } from './getPlaces.dtos.js'
-import { validateGetPlaceRequest } from './getPlaces.validator.js'
-import { getPlacesUseCases } from './useCases/getPlaces.useCases.js'
 import { sharedConstants } from '../../../shared/constants/shared.constants.js'
 import { Controller } from '../../../shared/types/Controller.type.js'
 import { HttpResponse } from '../../../shared/types/HttpResponse.js'
+import { GetPlaceResponseDto } from './getPlaces.dtos.js'
+import { validateGetPlacesRequest } from './getPlaces.validator.js'
+import { getPlacesUseCases } from './useCases/getPlaces.useCases.js'
 
-export const getPlaceController: Controller<
+export const getPlacesController: Controller<
   HttpResponse<GetPlaceResponseDto>
 > = async ({ httpRequest }) => {
-  const request = validateGetPlaceRequest({ httpRequest })
+  const request = validateGetPlacesRequest({ httpRequest })
 
   const { latitude, longitude, searchRadiusInMeters, offset, limit } =
     request.query
@@ -20,14 +20,15 @@ export const getPlaceController: Controller<
     longitude,
   }
 
-  const placeEntities = await getPlacesUseCases.getPlaceEntitiesByCoordinates({
-    coordinates,
-    searchRadiusInMeters,
-    offset,
-    limit,
-  })
+  const getPlaceEntities =
+    await getPlacesUseCases.getPlaceEntitiesByCoordinates({
+      coordinates,
+      searchRadiusInMeters,
+      offset,
+      limit,
+    })
 
-  if (!placeEntities || !placeEntities.length) {
+  if (!getPlaceEntities || !getPlaceEntities.length) {
     const placesNotFoundHttpResponse = {
       statusCode: StatusCodes.OK,
       body: {
@@ -38,18 +39,15 @@ export const getPlaceController: Controller<
     return placesNotFoundHttpResponse
   }
 
-  const filteredFieldEntities = placeEntities.map((placeEntity) => {
+  const filteredFieldEntities = getPlaceEntities.map((placeEntity) => {
     const distanceToPlaceInMeters = getDistance(
       coordinates,
       placeEntity.coordinates
     )
 
     return {
-      distanceToPlaceInMeters: distanceToPlaceInMeters,
       ...placeEntity,
-      createdBy: undefined,
-      createdAt: undefined,
-      updatedAt: undefined,
+      distanceToPlaceInMeters: distanceToPlaceInMeters,
     }
   })
 

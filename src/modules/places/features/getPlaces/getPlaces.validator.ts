@@ -4,9 +4,9 @@ import {
   coordinateLongitudeNumericSchema,
 } from '../../../shared/shared.validations.js'
 import { HttpRequest } from '../../../shared/types/HttpRequest.js'
-import { GetPlaceRequestDto } from './getPlaces.dtos.js'
+import { GetPlacesRequestDto } from './getPlaces.dtos.js'
 
-export const GetPlaceRequestSchema = z.object({
+export const GetPlacesRequestSchema = z.object({
   params: z.object({}),
   query: z.object({
     latitude: coordinateLatitudeNumericSchema,
@@ -18,14 +18,14 @@ export const GetPlaceRequestSchema = z.object({
   body: z.object({}),
 })
 
-type validateGetPlaceRequest = ({
+type ValidateGetPlacesRequest = ({
   httpRequest,
 }: {
   httpRequest: HttpRequest
-}) => GetPlaceRequestDto
+}) => GetPlacesRequestDto
 
-export const validateGetPlaceRequest: validateGetPlaceRequest = ({
+export const validateGetPlacesRequest: ValidateGetPlacesRequest = ({
   httpRequest,
 }) => {
-  return GetPlaceRequestSchema.parse(httpRequest)
+  return GetPlacesRequestSchema.parse(httpRequest)
 }

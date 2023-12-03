@@ -5,7 +5,7 @@ import { PlaceReadRecord } from '../recordTypes/placeReadRecord.type.js'
 
 const DEFAULT_SEARCH_RADIUS_IN_METERS = 5_000
 const DEFAULT_OFFSET = 0
-const DEFAULT_LIMIT = 20
+const DEFAULT_LIMIT = 10
 
 export const getPlaceReadRecordsByCoordinates = async ({
   coordinates,

@@ -1,7 +1,7 @@
 import { Coordinates } from '../../../../shared/types/Coordinates.type.js'
-import { placesMapper } from '../../../data/mapper/places.mapper.js'
-import { placesRepository } from '../../../data/repository/places.repository.js'
-import { PlaceEntity } from '../../../entities/place.entity.js'
+import { getPlacesMapper } from '../data/mapper/getPlaces.mapper.js'
+import { getPlacesRepository } from '../data/repository/getPlaces.repository.js'
+import { GetPlaceEntity } from '../getPlace.entity.js'
 
 type GetPlaceEntitiesByCoordinatesUseCase = ({
   coordinates,
@@ -13,29 +13,29 @@ type GetPlaceEntitiesByCoordinatesUseCase = ({
   searchRadiusInMeters?: number
   offset?: number
   limit?: number
-}) => Promise<PlaceEntity[] | null>
+}) => Promise<GetPlaceEntity[] | null>
 
 export const getPlaceEntitiesByCoordinates: GetPlaceEntitiesByCoordinatesUseCase =
   async ({ coordinates, searchRadiusInMeters, offset, limit }) => {
-    const placeReadRecords =
-      await placesRepository.getPlaceReadRecordsByCoordinates({
+    const getPlaceReadRecords =
+      await getPlacesRepository.getPlaceReadRecordsByCoordinates({
         coordinates,
         searchRadiusInMeters,
         offset,
         limit,
       })
 
-    if (!placeReadRecords.length) {
+    if (!getPlaceReadRecords.length) {
       return null
     }
 
-    const placeEntities = placeReadRecords.map((placeReadRecord) => {
-      const placeEntity = placesMapper.mapReadRecordToPlaceEntity({
-        placeReadRecord,
+    const getPlaceEntities = getPlaceReadRecords.map((getPlaceReadRecord) => {
+      const getPlaceEntity = getPlacesMapper.mapReadRecordToPlaceEntity({
+        getPlaceReadRecord,
       })
 
-      return placeEntity
+      return getPlaceEntity
     })
 
-    return placeEntities
+    return getPlaceEntities
   }
