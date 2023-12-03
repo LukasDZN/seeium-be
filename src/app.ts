@@ -13,6 +13,8 @@ import { ErrorResponseDto } from './modules/shared/types/ErrorResponseDto.type.j
 import { syncAirtableToMongoDb } from './scripts/airtable/syncAirtableToMongoDb.util.js'
 import { generalLogger } from './server.js'
 
+let isSyncAirtableToMongoDbRunning = false
+
 export const makeApp = () => {
   const app: Application = express()
 
@@ -78,6 +80,16 @@ export const makeApp = () => {
 
   app.get('/api/syncAirtable', async (req, res) => {
     try {
+      if (isSyncAirtableToMongoDbRunning) {
+        const errorResponseDto: ErrorResponseDto = {
+          message: 'Sync already running. Please try again later.',
+        }
+
+        return res.status(StatusCodes.CONFLICT).json(errorResponseDto)
+      }
+
+      isSyncAirtableToMongoDbRunning = true
+
       const resultLog = await syncAirtableToMongoDb({
         syncTriggerSource: 'By hitting the /api/syncAirtable endpoint',
       })
@@ -86,6 +98,8 @@ export const makeApp = () => {
     } catch (error) {
       console.log(error)
       res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(error)
+    } finally {
+      isSyncAirtableToMongoDbRunning = false
     }
   })
 
